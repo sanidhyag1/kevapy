@@ -1,5 +1,5 @@
 import os, uuid, pickle
-from pack.helper import write, load, ttl_check
+from kevapy_lib.helper import write, load, ttl_check
 import sys
 
 class Kevapy:
@@ -9,7 +9,12 @@ class Kevapy:
             path = os.getcwd()
         file_name = str(uuid.uuid4())[:8] + '.dat'
         self.file_path = os.path.join(path, file_name)
-        f = open(self.file_path, 'wb')
+        try:
+            f = open(self.file_path, 'wb')
+        except:
+            
+            raise Exception("Error: Provide correct path")
+        
         k = {}
         pickle.dump(k, f)
         f.close()
